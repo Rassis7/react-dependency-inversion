@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { http } from "./infra/http";
 
 type GitHubApi = {
   name: string;
@@ -12,9 +13,9 @@ export const App = () => {
 
   useEffect(() => {
     const getApiData = async () => {
-      const response = await fetch(
+      const response = await http.get<GitHubApi[]>(
         "https://api.github.com/users/RAssis7/repos"
-      ).then((response) => response.json());
+      );
 
       setRepos(response);
     };
