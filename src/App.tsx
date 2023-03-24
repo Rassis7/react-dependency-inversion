@@ -1,7 +1,8 @@
 import { useRepos } from "./hooks/useRepos";
+import { http } from "./infra/http";
 
 export const App = () => {
-  const { repos } = useRepos();
+  const { repos } = useRepos({ http });
 
   if (!repos.length) {
     return <h1>loading...</h1>;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { http } from "../infra/http";
+import { Http } from "../infra/http/types";
 
 type GitHubApi = {
   name: string;
@@ -8,7 +8,11 @@ type GitHubApi = {
   visibility: boolean;
 };
 
-export const useRepos = () => {
+type UseReposProps = {
+  http: Http;
+};
+
+export const useRepos = ({ http }: UseReposProps) => {
   const [repos, setRepos] = useState<GitHubApi[]>([]);
 
   useEffect(() => {
