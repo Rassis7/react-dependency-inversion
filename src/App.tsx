@@ -1,26 +1,11 @@
-import { useEffect, useState } from "react";
-import { http } from "./infra/http";
-
-type GitHubApi = {
-  name: string;
-  description: string;
-  html_url: string;
-  visibility: boolean;
-};
+import { useRepos } from "./hooks/useRepos";
 
 export const App = () => {
-  const [repos, setRepos] = useState<GitHubApi[]>([]);
+  const { repos } = useRepos();
 
-  useEffect(() => {
-    const getApiData = async () => {
-      const response = await http.get<GitHubApi[]>(
-        "https://api.github.com/users/RAssis7/repos"
-      );
-
-      setRepos(response);
-    };
-    getApiData();
-  }, []);
+  if (!repos.length) {
+    return <h1>loading...</h1>;
+  }
 
   return (
     <main>
