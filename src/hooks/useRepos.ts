@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Http } from "../infra/http/types";
+import { useContext, useEffect, useState } from "react";
+import { DependenceContext } from "../infra/dependencies";
 
 type GitHubApi = {
   name: string;
@@ -8,11 +8,8 @@ type GitHubApi = {
   visibility: boolean;
 };
 
-type UseReposProps = {
-  http: Http;
-};
-
-export const useRepos = ({ http }: UseReposProps) => {
+export const useRepos = () => {
+  const { http } = useContext(DependenceContext);
   const [repos, setRepos] = useState<GitHubApi[]>([]);
 
   useEffect(() => {

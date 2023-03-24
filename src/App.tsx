@@ -1,12 +1,7 @@
 import { useRepos } from "./hooks/useRepos";
-import { Http } from "./infra/http/types";
 
-type AppProps = {
-  http: Http;
-};
-
-export const App = ({ http }: AppProps) => {
-  const { repos } = useRepos({ http });
+export const App = () => {
+  const { repos } = useRepos();
 
   if (!repos.length) {
     return <h1>loading...</h1>;
